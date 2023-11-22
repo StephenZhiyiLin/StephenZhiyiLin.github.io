@@ -43,7 +43,7 @@
 <meta property="og:description" content="前言近年来，随着Python的爆火，越来越多的人（包括我在内）在初次学习编程语言时学习的都是Python而不是C或C++。而先学Python的人在学习C++时很容易会被Python编程中的一些习惯所影响，从而遇到一些问题。 我在初学C++时，就被单一定义规则（One Definition Rule，ODR）和LNK2005错误所困扰。经过一番摸索，我明确了问题的症结所在，并找到了解决方案。我认为，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-22T12:33:33.000Z">
-<meta property="article:modified_time" content="2023-11-22T12:47:21.020Z">
+<meta property="article:modified_time" content="2023-11-22T12:56:53.004Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="学习笔记">
 <meta property="article:tag" content="技术问题">
@@ -180,7 +180,7 @@
 <p>此时，如果进行编译就会发现无法正常编译，并且编译器（Visual Studio 2022）会报告<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk2005?view=msvc-170">LNK2005</a>错误，这是为什么呢？</p>
 <h2 id="问题的症结：单一定义规则（ODR）"><a href="#问题的症结：单一定义规则（ODR）" class="headerlink" title="问题的症结：单一定义规则（ODR）"></a>问题的症结：单一定义规则（ODR）</h2><p>为了解决上述问题，我们需要知道Pyhon和C++的三个不同之处：</p>
 <p>第一，在一个C++程序中，必须要有一个main函数作为程序的入口。而在Python中，代码从顶部的第一行开始执行，不需要定义main函数。</p>
-<p>第二，Python中的各个.py源文件之间是独立的，执行一个源文件时其他源文件不会被执行。而在C++中，编译源文件时会将项目中的所有源文件都编译，且会从包含main函数的源文件开始编译。</p>
+<p>第二，Python中的各个.py源文件之间是独立的，执行一个源文件时其他源文件不会被执行。而在C++中，编译源文件时会将项目中所有的.cpp源文件都编译，且会从包含main函数的源文件开始编译。</p>
 <p>第三，C++遵循<strong>单一定义规则（ODR）</strong>，而Python中没有这样的规则。单一定义规则（ODR）简单来说就是在一个程序中，变量、函数、类等只能有一个定义（ODR的具体内容可以参考<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/language/definition">Definitions and ODR (One Definition Rule)</a>）。而在Python中，可以在同一个程序中定义多个同名的变量、函数或类，且后面的定义会覆盖掉前面的定义。</p>
 <p>明白了以上三点，就可以很轻松地看出先前问题的症结。在编译variable.cpp时，会将同一个项目中的Hello World.cpp一同编译。并且这两个源文件中都定义了main函数，违背了ODR，由此导致编译器报告<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-error-lnk2005?view=msvc-170">LNK2005</a>错误。</p>
 <h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>由于在编译variable.cpp时，会将Hello World.cpp一同编译，因此为了遵守ODR，需要在编译variable.cpp前，将Hello World.cpp中main函数的定义注释掉，以此保证只有一个main函数的定义。</p>
@@ -225,7 +225,7 @@
         </p>
     
     
-    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+    <p>Powered by <a href="stephenzhiyilin.github.io" target="_blank">Stephen Zhiyi Lin</a>
 </footer>
 
         </div>
