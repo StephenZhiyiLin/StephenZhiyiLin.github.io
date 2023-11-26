@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>C++程序设计——第1章 C++基础知识 | Stephen&#39;s Lab</title>
+
+
+    <meta name="keywords" content="学习笔记, C++">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="1. 如何编写C++程序 编写C++程序有四个步骤：   创建项目。   在项目中创建文件（源文件）。   在文件中编写代码。   运行程序。    1.1 创建项目 编写C++程序最常用的IDE（集成开发环境）是Visual Studio。 创建项目的一般步骤为（以Visual Studio 2022为例）：   打开Visual Studio。   点击创建新项目。在新出现的窗口中的语言选项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++程序设计——第1章 C++基础知识">
+<meta property="og:url" content="http://example.com/2023/11/26/Cpp-Chapter1/index.html">
+<meta property="og:site_name" content="Stephen&#39;s Lab">
+<meta property="og:description" content="1. 如何编写C++程序 编写C++程序有四个步骤：   创建项目。   在项目中创建文件（源文件）。   在文件中编写代码。   运行程序。    1.1 创建项目 编写C++程序最常用的IDE（集成开发环境）是Visual Studio。 创建项目的一般步骤为（以Visual Studio 2022为例）：   打开Visual Studio。   点击创建新项目。在新出现的窗口中的语言选项">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/11/26/Cpp-Chapter1/Cpp-Chapter1/Cpp_C1_img01.png">
+<meta property="og:image" content="http://example.com/2023/11/26/Cpp-Chapter1/Cpp-Chapter1/Cpp_C1_img02.png">
+<meta property="og:image" content="http://example.com/2023/11/26/Cpp-Chapter1/Cpp-Chapter1/Cpp_C1_img03.png">
+<meta property="og:image" content="http://example.com/2023/11/26/Cpp-Chapter1/Cpp-Chapter1/Cpp_C1_img04.png">
+<meta property="og:image" content="http://example.com/2023/11/26/Cpp-Chapter1/Cpp-Chapter1/Cpp_C1_img05.png">
+<meta property="og:image" content="http://example.com/2023/11/26/Cpp-Chapter1/Cpp-Chapter1/Cpp_C1_img06.png">
+<meta property="article:published_time" content="2023-11-26T13:55:21.000Z">
+<meta property="article:modified_time" content="2023-11-26T14:35:01.264Z">
+<meta property="article:author" content="Stephen Zhiyi Lin">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2023/11/26/Cpp-Chapter1/Cpp-Chapter1/Cpp_C1_img01.png">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Stephen&#39;s Lab</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a target="_blank" rel="noopener" href="https://github.com/StephenZhiyiLin" class="navbar-menu button">Github主页</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a target="_blank" rel="noopener" href="https://github.com/StephenZhiyiLin" class="dropdown-menu button">Github主页</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        C++程序设计——第1章 C++基础知识
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2023/11/" class="post-meta__date button">2023-11-26</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" class="button">计算机科学与技术</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="1-如何编写c程序"><a class="markdownIt-Anchor" href="#1-如何编写c程序"></a> 1. 如何编写C++程序</h2>
+<p>编写C++程序有四个步骤：</p>
+<ol>
+<li>
+<p>创建项目。</p>
+</li>
+<li>
+<p>在项目中创建文件（源文件）。</p>
+</li>
+<li>
+<p>在文件中编写代码。</p>
+</li>
+<li>
+<p>运行程序。</p>
+</li>
+</ol>
+<h3 id="11-创建项目"><a class="markdownIt-Anchor" href="#11-创建项目"></a> 1.1 创建项目</h3>
+<p>编写C++程序最常用的IDE（集成开发环境）是Visual Studio。</p>
+<p>创建项目的一般步骤为（以Visual Studio 2022为例）：</p>
+<ol>
+<li>
+<p>打开Visual Studio。</p>
+</li>
+<li>
+<p>点击创建新项目。在新出现的窗口中的语言选项栏选择C++，选中空项目，然后点击下一步。</p>
+</li>
+</ol>
+<p><img src="Cpp-Chapter1/Cpp_C1_img01.png" alt="" /></p>
+<p><img src="Cpp-Chapter1/Cpp_C1_img02.png" alt="" /></p>
+<ol start="3">
+<li>配置项目的有关信息（名称、路径等）。</li>
+</ol>
+<p><img src="Cpp-Chapter1/Cpp_C1_img03.png" alt="" /></p>
+<h3 id="12-在项目中创建文件"><a class="markdownIt-Anchor" href="#12-在项目中创建文件"></a> 1.2 在项目中创建文件</h3>
+<p>在Visual Studio界面下的解决方案资源管理器中可以找到刚才创建的项目。在下方的源文件处右键，选择添加-新建项。再选择C++文件（.cpp），并对文件进行命名，最后点击添加即可。</p>
+<p><img src="Cpp-Chapter1/Cpp_C1_img04.png" alt="" /></p>
+<p><img src="Cpp-Chapter1/Cpp_C1_img05.png" alt="" /></p>
+<h3 id="13-编写代码"><a class="markdownIt-Anchor" href="#13-编写代码"></a> 1.3 编写代码</h3>
+<p>在刚刚创建的C++源文件中编写一段代码，以实现在屏幕上输出文字&quot;Hello World!&quot;的功能。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	cout &lt;&lt; &quot;Hello Wolrd!&quot; &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="14-运行程序"><a class="markdownIt-Anchor" href="#14-运行程序"></a> 1.4 运行程序</h3>
+<p>在Viual Studio中点击上方菜单栏的本地Windows调试器，即可运行程序。</p>
+<p><img src="Cpp-Chapter1/Cpp_C1_img06.png" alt="" /></p>
+<h2 id="2-注释"><a class="markdownIt-Anchor" href="#2-注释"></a> 2. 注释</h2>
+<p><strong>注释的概念：</strong> 代码中的一些解释、说明用的文字。</p>
+<p><strong>注释的作用：</strong> 方便自己和他人阅读代码，提高代码的可读性。</p>
+<p>注释的内容会被编译器忽略，不会被编译。</p>
+<p><strong>注释的类型：</strong></p>
+<ul>
+<li><strong>单行注释：</strong> 在一行代码后添加//即可添加单行注释。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//单行注释</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>多行注释：</strong> 在注释的第一行和最后一行分别写上/*和*/，其中的内容就是多行注释。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">这是一个多行注释。</span><br><span class="line">只需要在第一行和最后一行分别写上/*即可。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong> 可以试着为刚才的Hello World程序的代码添加注释。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()//定义main函数</span><br><span class="line">&#123;</span><br><span class="line">	cout &lt;&lt; &quot;Hello World!&quot; &lt;&lt; endl;//在屏幕上输出&quot;Hello World!&quot;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);//暂停程序运行，直至用户按下任意键</span><br><span class="line"></span><br><span class="line">	return 0;//返回0，表示程序正常退出</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">main函数是程序的入口，编译器在编译源文件时会从包含main函数的源文件开始编译。</span><br><span class="line">每个程序都必须要有一个main函数，否则无法编译（报告LNK2019错误）。</span><br><span class="line">并且为了避免混淆（即编译器不知道从哪个源文件开始编译），main函数在一个程序（项目）中有且只能有一个。</span><br><span class="line">如果main函数有多个定义，就违背了唯一定义规则（ODR），编译器会报告LNK2005错误。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<h2 id="3-变量"><a class="markdownIt-Anchor" href="#3-变量"></a> 3. 变量</h2>
+<p><strong>变量的概念：</strong> 有具名的、可供程序操作的、内部数据可变的内存空间。</p>
+<p><strong>变量的作用：</strong> 为一段指定的内存空间取名（即变量名），方便我们操作这段内存空间。</p>
+<p><strong>定义变量：</strong> 数据类型 变量名 = 变量的初始值;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>; <span class="comment">//定义变量a，其初始值为10</span></span><br></pre></td></tr></table></figure>
+<p>注：</p>
+<ol>
+<li>
+<p>程序中所有的数据都是放置在内存中的。</p>
+</li>
+<li>
+<p>与Python等编程语言不同，使用C++编写程序时需要自行管理内存资源，因此有必要从内存空间的角度来理解变量等概念。</p>
+</li>
+<li>
+<p>每一段内存空间都有一个唯一的16进制的地址编号。如果用地址编号去调用内存，就太麻烦了。而如果为这段内存空间取名，后续在调用内存时就只需要用变量名即可，这样就方便许多。</p>
+</li>
+<li>
+<p>变量就像是一个贴有标签（变量名）的、有开口的箱子。我们可以往这个箱子里放置一些物品（数据），并且可以对这些物品进行数量上的操作（但是我们不能改变这些物品的种类，即变量的数据类型是不可变更的）。如果我们知道箱子的标签，那么我们就可以很方便地找到并使用箱子中的物品。</p>
+</li>
+<li>
+<p>在一个C++程序中，一个变量有且只能有一个定义。</p>
+</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()//定义main函数</span><br><span class="line">&#123;</span><br><span class="line">	int a = 10;//定义整数型变量a，其初始值为10</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; endl;//在屏幕上输出文字&quot;a = 10（a的值）&quot;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);//暂停程序运行，直至用户按下任意键</span><br><span class="line"></span><br><span class="line">	return 0;//返回0，表示程序正常退出</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4常量"><a class="markdownIt-Anchor" href="#4常量"></a> 4.常量</h2>
+<p><strong>常量的概念：</strong> 程序运行过程中，内部数据始终不变的内存空间。</p>
+<p><strong>常量的作用：</strong> 记录程序中不可更改的数据。</p>
+<p><strong>定义常量：</strong></p>
+<p>定义常量的方式有两种。</p>
+<ul>
+<li>
+<p>#define 宏常量：#define 常量名 常量值
+通常在文件上方进行定义。</p>
+</li>
+<li>
+<p>const关键字：const 数据类型 常量名 = 常量值;
+在定义变量时使用const关键字，就可以指定变量的值为常量。</p>
+</li>
+</ul>
+<p>注：</p>
+<ol>
+<li>
+<p>与变量类似，我们也可以把常量理解为一个有标签的箱子，只不过这个箱子是封闭的，我们不能对放置在其中的物品进行数量上的操作。</p>
+</li>
+<li>
+<p>常量不可修改。若修改常量，则编译时会报错。</p>
+</li>
+</ol>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">#define days 7//定义宏常量</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	//days = 8;//错误，常量不可修改</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; &quot;一周有：&quot; &lt;&lt; days &lt;&lt; &quot;天&quot; &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	const int months = 12;//使用const关键字修饰变量，定义常量</span><br><span class="line"></span><br><span class="line">	//months = 13;// 错误，常量不可修改</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; &quot;一年有：&quot; &lt;&lt; months &lt;&lt; &quot;个月&quot; &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="5关键字"><a class="markdownIt-Anchor" href="#5关键字"></a> 5.关键字</h2>
+<p><strong>关键字的概念：</strong> C++中预先规定的，有一定功能（含义）的字符序列。</p>
+<p>C++中的关键字有很多（如之前学习过的int和const），在日常学习和实践中要注意积累。</p>
+<p>注：关键字不能作为变量或常量的名称，否则会导致歧义，且编译时会报错。</p>
+<h2 id="6标识符命名规则"><a class="markdownIt-Anchor" href="#6标识符命名规则"></a> 6.标识符命名规则</h2>
+<p><strong>标识符的概念：</strong></p>
+<p>标识符是用于表示以下内容之一的字符序列：</p>
+<ul>
+<li>
+<p>对象、变量或常量名称（最常见的标识符）</p>
+</li>
+<li>
+<p>类、结构或联合名称</p>
+</li>
+<li>
+<p>枚举类型名称</p>
+</li>
+<li>
+<p>类、结构、联合或枚举的成员</p>
+</li>
+<li>
+<p>函数或类成员函数</p>
+</li>
+<li>
+<p>typedef名称</p>
+</li>
+<li>
+<p>标签名称</p>
+</li>
+<li>
+<p>宏名称</p>
+</li>
+<li>
+<p>宏参数</p>
+</li>
+</ul>
+<p><strong>标识符的命名规则：</strong></p>
+<ul>
+<li>
+<p>标识符不能是关键字</p>
+</li>
+<li>
+<p>标识符只能由字母、数字和下划线组成</p>
+</li>
+<li>
+<p>第一个字符必须为字母或下划线</p>
+</li>
+<li>
+<p>标识符中的字母区分大小写</p>
+</li>
+</ul>
+<p>注：给标识符命名时，尽量做到见名知意，以提高代码可读性。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2023-11-26</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-tags__link button"># 学习笔记</a><a href="/tags/C/" class="post-tags__link button"># C++</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2023/11/22/ODR-and-LNK2005/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            单一定义规则（ODR）与LNK2005错误
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+    
+    
+
+
+    
+     
+ 
+
+ 
+    
+    
+    <p>Powered by <a href="stephenzhiyilin.github.io" target="_blank">Stephen Zhiyi Lin</a>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
