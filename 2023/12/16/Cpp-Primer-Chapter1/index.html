@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+    
+    
+    
+    
+
+
+    <!-- meta -->
+
+
+<title>《C++ Primer》学习笔记——第1章 开始 | Stephen&#39;s Lab</title>
+
+
+    <meta name="keywords" content="学习笔记, C++">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="我们通过编写一个简单的程序来开始对C++的学习。假设有一家书店现在需要一个程序来处理其销售记录，每条销售记录包含三个数据项： 0-201-70353-X 4 24.99 第一项是书的ISBN号，第二项是销售的册数，第三项是书的单价。 为了编写这个程序，需要用到C++的一些基本特性。并且容易得知，这个程序需要：  定义变量  进行输入和输出  使用数据结构保存数据  检测两条记录是否有相同的ISBN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《C++ Primer》学习笔记——第1章 开始">
+<meta property="og:url" content="http://example.com/2023/12/16/Cpp-Primer-Chapter1/index.html">
+<meta property="og:site_name" content="Stephen&#39;s Lab">
+<meta property="og:description" content="我们通过编写一个简单的程序来开始对C++的学习。假设有一家书店现在需要一个程序来处理其销售记录，每条销售记录包含三个数据项： 0-201-70353-X 4 24.99 第一项是书的ISBN号，第二项是销售的册数，第三项是书的单价。 为了编写这个程序，需要用到C++的一些基本特性。并且容易得知，这个程序需要：  定义变量  进行输入和输出  使用数据结构保存数据  检测两条记录是否有相同的ISBN">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-16T14:19:58.000Z">
+<meta property="article:modified_time" content="2023-12-16T14:21:20.076Z">
+<meta property="article:author" content="Stephen Zhiyi Lin">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" >
+        
+            <link rel="stylesheet" id="hl-dark-theme" href="/css/highlight/dark.css" media="none">
+        
+    
+
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Stephen&#39;s Lab</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a target="_blank" rel="noopener" href="https://github.com/StephenZhiyiLin" class="navbar-menu button">Github主页</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a target="_blank" rel="noopener" href="https://github.com/StephenZhiyiLin" class="dropdown-menu button">Github主页</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        《C++ Primer》学习笔记——第1章 开始
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2023/12/" class="post-meta__date button">2023-12-16</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6%E4%B8%8E%E6%8A%80%E6%9C%AF/" class="button">计算机科学与技术</a>
+
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>我们通过编写一个简单的程序来开始对C++的学习。假设有一家书店现在需要一个程序来处理其销售记录，每条销售记录包含三个数据项：</p>
+<p><strong>0-201-70353-X</strong> <strong>4</strong> <strong>24.99</strong></p>
+<p>第一项是书的ISBN号，第二项是销售的册数，第三项是书的单价。</p>
+<p>为了编写这个程序，需要用到C++的一些基本特性。并且容易得知，这个程序需要：</p>
+<ul>
+<li><p>定义变量</p>
+</li>
+<li><p>进行输入和输出</p>
+</li>
+<li><p>使用数据结构保存数据</p>
+</li>
+<li><p>检测两条记录是否有相同的ISBN号</p>
+</li>
+<li><p>包含一个循环来处理所有的销售记录</p>
+</li>
+</ul>
+<h2 id="1-1-编写一个简单的C-程序"><a href="#1-1-编写一个简单的C-程序" class="headerlink" title="1.1 编写一个简单的C++程序"></a>1.1 编写一个简单的C++程序</h2><p>每个C++程序都包含一个或多个函数（function）。其中必须有一个名为<code>main</code>的函数，操作系统通过调用<code>main</code>函数来运行C++程序。</p>
+<p>一个简单的<code>main</code>函数如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">int main()<br>&#123;<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>函数的定义包含四部分：</p>
+<ul>
+<li><p>返回类型（return type），在这里是<code>int</code>，即整数类型</p>
+</li>
+<li><p>函数名（function name）</p>
+</li>
+<li><p>形参列表（parameter list），包含在一对括号中，可以为空</p>
+</li>
+<li><p>函数体（function body），包含在一对花括号中</p>
+</li>
+</ul>
+<p><code>main</code>函数虽然比较特殊，但除返回类型必须为<code>int</code>类型外，其定义方法与其他函数是一致的。</p>
+<p>这个<code>main</code>函数非常简单，其唯一的功能就是通过<code>return</code>语句返回一个值为0的数。</p>
+<p>在大多数操作系统中，<code>main</code>函数的返回值被用来指示状态。0表示成功，而-1表示失败（错误）。</p>
+<p>注：</p>
+<p>1.当<code>return</code>语句返回值时，这个值必须和函数的返回类型相容。例如在上面的程序中，<code>reutrn</code>返回0，而0恰好是一个<code>int</code>类型的值。</p>
+<p>2.类型是程序设计中的一个基本概念。一种类型不仅定义了数据元素的内容，还定义了这类数据上可以运行的运算。程序中的数据都保存在变量中，而每个变量都有类型。</p>
+<p><strong>编译、运行程序</strong></p>
+<p>程序的源代码一般保存在源文件（source file）中。当程序的代码编写好后，就需要对其进行编译，以得到可被操作系统运行的程序。我们既可以通过IDE（集成开发环境）进行编译，又可以通过在命令行界面中调用编译器来进行编译。</p>
+<p>这里以Linux操作系统为例，演示如何编译、运行上面的程序。</p>
+<p>首先，需要用如下命令下载GNU编译器（使用的包管理器依具体的发行版而定）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs &#123;.line-numbers&#125;">$ sudo dnf install gcc-c++<br></code></pre></td></tr></table></figure>
+<p>然后通过如下命令调用编译器，编译上面的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs &#123;.line-numbers&#125;">$ g++ -o prog1 prog1.cc -Wall<br></code></pre></td></tr></table></figure>
+<p>其中<code>g++</code>是调用GNU编译器的命令，<code>-o prog1</code>表示将源文件编译为名为<code>prog1</code>的可执行文件，而<code>prog1.cc</code>是要编译的源文件。<code>-Wall</code>选项会检测代码中的错误，并在发生错误时给出错误信息，这有利于程序的调试，因此在编译时习惯上都会选用该选项。</p>
+<p>在编译完成后，会得到名为<code>prog1</code>的可执行文件。可以通过如下命令来运行这个程序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs &#123;.line-numbers&#125;">$ ./prog1<br></code></pre></td></tr></table></figure>
+<p>其中，<code>./</code>表示文件在当前目录下。</p>
+<p>在Linux系统中，还可通过如下命令来获取程序的返回值：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs &#123;.line-numbers&#125;">$ echo $?<br></code></pre></td></tr></table></figure>
+<p>在运行上面的程序并输入上述命令后，就会得到返回值0。</p>
+<h2 id="1-2-初识输入输出"><a href="#1-2-初识输入输出" class="headerlink" title="1.2 初识输入输出"></a>1.2 初识输入输出</h2><p>C++通过<code>iostream</code>标准库提供输入输出机制。<code>iostream</code>标准库包括<code>istream</code>和<code>ostream</code>两类对象，分别用来控制输入流和输出流。所谓流（stream），就是按顺序生成和消耗的字符序列。</p>
+<p><strong>标准输入输出对象</strong></p>
+<p><code>iostream</code>标准库定义了四个输入输出对象：</p>
+<ul>
+<li><p><code>cin</code>：标准输入，<code>istream</code>类对象，用于处理输入的数据。</p>
+</li>
+<li><p><code>cout</code>：标准输出，<code>ostream</code>类对象，用于处理输出的数据。</p>
+</li>
+<li><p><code>cerr</code>：标准错误，<code>ostream</code>类对象，用于输出警告和错误信息。</p>
+</li>
+<li><p><code>clog</code>：<code>ostream</code>类对象，用于输出程序运行时的一般性信息。</p>
+</li>
+</ul>
+<p><strong>一个使用IO库的程序</strong></p>
+<p>对于我们要编写的书店程序而言，数据的输入和输出显然是必要的。在这里，我们先解决一个相关但简单的问题：编写一个程序，提示用户输入两个数，并输出它们的和。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">#include &lt;iostream&gt;<br>int main()<br>&#123;<br>    std::cout &lt;&lt; &quot;Enter two numbers: &quot; &lt;&lt; std::endl;<br>    int v1 = 0, v2 = 0;<br>    std::cin &gt;&gt; v1 &gt;&gt; v2;<br>    std::cout &lt;&lt; &quot;The sum of &quot; &lt;&lt; v1 &lt;&lt; &quot; and &quot; &lt;&lt; v2 <br>              &lt;&lt; &quot; is &quot; &lt;&lt; v1 + v2 &lt;&lt; std::endl;<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在编译并运行这个程序后，首先会在屏幕上输出文字：</p>
+<p><code>Enter two numbers:</code></p>
+<p>假设用户输入了：</p>
+<p><code>3 7</code></p>
+<p>在按下回车后，屏幕上就会显示程序运行的结果：</p>
+<p><code>The sum of 3 and 7 is 10</code></p>
+<p>注意到在代码的第一行，使用了<code>#include &lt;iostream&gt;</code>来指定使用<code>iostream</code>标准库，尖括号<code>&lt;&gt;</code>中的名字被称为头文件（header）。若在程序中使用了标准库，则必须要用<code>#include &lt;标准库名&gt;</code>来在代码中指定相关的头文件（头文件名就是标准库名）。且一般习惯将<code>#include</code>语句写在源文件的开始位置。</p>
+<p><strong>向流写入数据</strong></p>
+<p><code>main</code>函数体中的第一个语句是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">std::cout &lt;&lt; &quot;Enter two numbers: &quot; &lt;&lt; std::endl;<br></code></pre></td></tr></table></figure>
+<p>这个语句执行了一个表达式（expression）。</p>
+<p><strong>表达式：</strong> 由一个或多个运算对象以及（通常是）一个运算符组成，执行后返回一个运算结果。</p>
+<p>上述语句使用了输出运算符<code>&lt;&lt;</code>。输出运算符<code>&lt;&lt;</code>左侧的运算对象必须是一个<code>ostream</code>类对象，而右侧的对象是要输出的值。输出运算符<code>&lt;&lt;</code>会将右侧的值写入到左侧的<code>ostream</code>对象中，并返回左侧的<code>ostream</code>对象（即其左侧的<code>ostream</code>对象就是表达式的运算结果）。</p>
+<p>不难看出，上述语句中的第一个输出运算符会将<code>&quot;Enter two numbers: &quot;</code>写入到标准输出流<code>cout</code>中，然后返回<code>cout</code>，返回的<code>cout</code>又将成为第二个输出运算符左侧的运算对象。而第二个输出运算符会将<code>endl</code>写入到<code>cout</code>中。这个语句事实上将两个表达式合并到一个语句中，我们也可以将这个语句分别写成两个两个语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">std::cout &lt;&lt; &quot;Enter two numbers: &quot;;<br>std::cout &lt;&lt; std::endl;<br></code></pre></td></tr></table></figure>
+<p>第一条语句是向用户输出一行文字’Enter two numbers: ‘。第二条语句是向输出流<code>cout</code>中写入操纵符（manipulator）<code>endl</code>。<code>endl</code>的功能是向输出流中插入一个换行符（\n），并立刻刷新缓冲区（buffer）。</p>
+<p>注：</p>
+<p>1.表达式的运算对象不一定是数。</p>
+<p>2.当我们进行输入输出操作时，由于处理器的运行速度快，输入输出设备的运行速度慢，为了协调这种运行速度差异，提高程序的运行效率，计算机会在内存中划出一块名为缓冲区的区域来临时存放输入输出的数据。例如，想象一下我们正在吃袋装零食，如果我们每吃一袋就要下楼扔一次垃圾，就太麻烦了。我们可以先把垃圾放在一个垃圾桶中，等吃完零食后再把垃圾桶中的垃圾处理掉。此时，零食包装袋就是需要输出的数据，而垃圾桶就是缓冲区。</p>
+<p><strong>命名空间</strong></p>
+<p>注意到先前在使用标准输出<code>cout</code>时，没有直接写<code>cout</code>，而是写了<code>std::cout</code>。前缀<code>std::</code>指出使用的名字<code>cout</code>是定义在名为<code>std</code>的命名空间（namespace）中的。</p>
+<p>命名空间是C++的一个基本特性。C语言规定变量名不能和关键字冲突，但没有规定变量名不能和库中的变量名冲突。为了避免这种冲突，C++引入了命名空间，用于指定所使用名称的出处。标准库定义的所有名字都在命名空间<code>std</code>中。</p>
+<p>在使用标准库中的名字时，必须显式地指出使用的名字来自于命名空间<code>std</code>。例如，要使用标准输出<code>cout</code>，就必须写<code>std::cout</code>，其中作用域运算符<code>::</code>的功能就是指定使用的名字<code>cout</code>来自命名空间<code>std</code>。</p>
+<p><strong>从流读取数据</strong></p>
+<p>在提示用户输入数字后，程序就需要读取用户输入的数字。</p>
+<p>首先创建两个变量来保存用户输入的数字（程序中的数据都保存在变量中）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">int v1 = 0, v2 = 0;<br></code></pre></td></tr></table></figure>
+<p>我们创建了两个<code>int</code>型的变量<code>v1</code>和<code>v2</code>，并将其初始化（即在创建变量时为其赋予一个值）为0。</p>
+<p>程序通过如下语句将数据保存在变量<code>v1</code>和<code>v2</code>中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">std::cin &gt;&gt; v1 &gt;&gt; v2;<br></code></pre></td></tr></table></figure>
+<p>输入运算符<code>&gt;&gt;</code>左侧的运算对象必须是一个<code>istream</code>类对象，其功能是将左侧<code>istream</code>类对象中的数据写入到右侧对象中，并返回左侧的<code>istream</code>对象（即其左侧的<code>istream</code>对象就是表达式的运算结果）。</p>
+<p>上述语句中的第一个输入运算符会将标准输入<code>cin</code>中保存的第一个数写入到变量<code>v1</code>中，然后返回<code>cin</code>，而<code>cin</code>又将成为第二个输入运算符左侧的运算对象。第二个输入运算符则会将<code>cin</code>中保存的第二个数写入到变量<code>v2</code>中。简单来说，上述语句的功能就是从标准输入<code>cin</code>中读取两个数，并将第一个数写入到<code>v1</code>中，将第二个数写入到<code>v2</code>中。这条语句和下面的两条语句是等价的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">std::cin &gt;&gt; v1;<br>std::cin &gt;&gt; v2;<br></code></pre></td></tr></table></figure>
+<p><strong>完成程序</strong></p>
+<p>在读取用户输入的两个数后，程序就可以输出运算的结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">std::cout &lt;&lt; &quot;The sum of &quot; &lt;&lt; v1 &lt;&lt; &quot; and &quot; &lt;&lt; v2 <br>          &lt;&lt; &quot; is &quot; &lt;&lt; v1 + v2 &lt;&lt; std::endl;<br></code></pre></td></tr></table></figure>
+<p>尽管与之前的输出语句相比，这条语句要更长，但其功能也非常容易理解，即按顺序将<code>&quot;The sum of &quot;</code>，<code>v1</code>，<code>&quot; and &quot;</code>等值写入到标准输出<code>cout</code>中。</p>
+<h2 id="1-3-注释"><a href="#1-3-注释" class="headerlink" title="1.3 注释"></a>1.3 注释</h2><p>注释（comments）的作用是帮助人类理解代码，通常用于概述算法，说明变量的用途和解释晦涩难懂的代码段。编译器在编译时会忽略掉注释。</p>
+<p><strong>C++中注释的种类</strong></p>
+<p>C++中的注释有两种。</p>
+<p><strong>单行注释：</strong> 以双斜线<code>//</code>开始，以换行符结束。单行注释中可以包含任何文本，包括额外的双斜线。</p>
+<p><strong>多行注释：</strong> 以<code>/*</code>开始，以<code>*/</code>结束（<code>/*</code>和<code>*/</code>称为注释界定符），其中可以包含除<code>/*</code>和<code>*/</code>以外的任意内容，包括换行符。编译器会将<code>/*</code>和<code>*/</code>之间的内容都当作注释。</p>
+<p>在使用多行注释时，最好指明多行注释中的程序行是注释的一部分，常用的方法是在多行注释中每一行的开头写一个星号<code>*</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">#include &lt;iostream&gt;<br>/*<br>* 简单main函数：<br>* 读取两个数，并求它们的和。<br>*/<br>int main()<br>&#123;<br>    // 提示用户输入两个数。<br>    std::cout &lt;&lt; &quot;Enter two numbers: &quot; &lt;&lt; std::endl;<br>    int v1 = 0, v2 = 0;// 保存输入的数据的变量。<br>    std::cin &gt;&gt; v1 &gt;&gt; v2;// 读取输入数据。<br>    std::cout &lt;&lt; &quot;The sum of &quot; &lt;&lt; v1 &lt;&lt; &quot; and &quot; &lt;&lt; v2 <br>              &lt;&lt; &quot; is &quot; &lt;&lt; v1 + v2 &lt;&lt; std::endl;<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>多行注释不能嵌套</strong></p>
+<p>一个多行注释不能嵌套在另一个多行注释中，否则编译器会报错。这是因为多行注释是以<code>/*</code>开始，以<code>*/</code>结束的，如果将一个多行注释嵌套在另一个多行注释中，那么编译器就无法理解注释从哪里开始，到哪里结束。若编译下面的代码，则编译器会报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">/*<br>* 注释界定符对/* */不能嵌套。<br>* “不能嵌套”几个字会被编译器认为是源码，<br>* 像剩余代码一样处理，编译时就会报错。<br>*/<br>int main()<br>&#123;<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>当我们在调试程序时，经常会注释掉一些代码。考虑到这些代码中可能会包含多行注释，因此注释这些代码最好的方法是在代码中每一行的开头加上双斜线（即用单行注释的方式来注释掉需要注释的代码）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">// /*<br>// * 单行注释中的任何内容都会被忽略。<br>// * 包括嵌套的注释界定符对也一样会被忽略。<br>// */<br></code></pre></td></tr></table></figure>
+<h2 id="1-4-控制流"><a href="#1-4-控制流" class="headerlink" title="1.4 控制流"></a>1.4 控制流</h2><p>语句一般是按顺序执行的。而C++提供了几种控制流语句，允许我们写出更为复杂的语句执行路径。</p>
+<h3 id="1-4-1-while语句"><a href="#1-4-1-while语句" class="headerlink" title="1.4.1 while语句"></a>1.4.1 while语句</h3><p><code>while</code>语句会反复执行一段代码，直至条件为假。可以利用<code>while</code>语句编写一个程序，求1到10的和。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">#include &lt;iostream&gt;<br>int main()<br>&#123;<br>    // sum用于保存求和的结果，val用于表示1到10这10个数。<br>    int sum = 0, val = 1;<br>    // 只要val的值小于等于10，while语句就会持续执行。<br>    while (val &lt;= 10) &#123;<br>        sum += val;// 将sum + val赋给sum。<br>        ++val;// 将val加1。<br>    &#125;<br>    std::cout &lt;&lt; &quot;Sum of 1 to 10 inclusive is &quot; &lt;&lt; sum &lt;&lt; std::endl;<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>可以看出程序中包含了一段<code>while</code>语句。<code>while</code>语句的结构为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">while (condition)<br>    statement<br></code></pre></td></tr></table></figure>
+<p><code>while</code>语句会交替检测<code>condition</code>和执行<code>statement</code>。条件（condition）就是一个会产生真假结果的表达式。当<code>condition</code>为真时，就会执行<code>statement</code>。在执行完<code>statement</code>后，<code>while</code>语句又会检测<code>condition</code>是否为真，若为真，则继续执行<code>statement</code>，若为假，则结束<code>while</code>语句。</p>
+<p>在上面的例子中，<code>while</code>语句的结构为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">// 只要val的值小于等于10，while语句就会持续执行。<br>while (val &lt;= 10) &#123;<br>        sum += val;// 将sum + val赋给sum。<br>        ++val;// 将val加1。<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><code>while</code>语句的条件使用小于等于运算符（<code>&lt;=</code>）来检测<code>val</code>是否小于等于10。当<code>val</code>小于等于10时，条件为真，就会执行<code>while</code>循环体。在这里，<code>while</code>循环体是由两条语句组成的语句块（由一对花括号所包围的语句的集合）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">&#123;<br>    sum += val;// 将sum + val赋给sum。<br>    ++val;// 将val加1。<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>第一条语句使用了复合赋值运算符（<code>+=</code>），求出<code>sum</code>和<code>val</code>的和，并将结果保存在<code>sum</code>中。这条语句和<code>sum = sum + val;</code>是等价的。</p>
+<p>第二条语句使用了递增运算符（<code>++</code>），将<code>val</code>的值加1。<code>++val</code>和<code>val = val + 1;</code>是等价的。</p>
+<p>当执行完<code>while</code>循环体后，<code>while</code>语句会再次检测条件是否为真（注意此时<code>val</code>的值已加1）。当<code>val</code>仍小于等于10时，会继续执行<code>while</code>循环体。当<code>val</code>大于10时，程序就会结束执行<code>while</code>循环，继续执行接下来的语句。</p>
+<h3 id="1-4-2-for语句"><a href="#1-4-2-for语句" class="headerlink" title="1.4.2 for语句"></a>1.4.2 for语句</h3><p>在<code>while</code>语句中，采用了在循环条件中检测变量，在循环体中递增变量的模式。C++中定义了另一种语句——<code>for</code>语句来简化这种循环。可以使用<code>for</code>语句重写计算1到10的和的程序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">#include &lt;iostream&gt;<br>int main()<br>&#123;<br>    int sum = 0;// sum用于保存求和的结果。<br>    for (int val = 1; val &lt;= 10; ++val)<br>        sum += val;// 等价于sum = sum + val。<br>    std::cout &lt;&lt; &quot;Sum of 1 to 10 inclusive is &quot; &lt;&lt; sum &lt;&lt; std::endl;<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>与先前一样，我们定义了<code>int</code>型变量<code>sum</code>来保存求和结果。而变量<code>val</code>的定义则成为<code>for</code>语句的一部分。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">for (int val = 1; val &lt;= 10; ++val)<br>    sum += val;// 等价于sum = sum + val。<br></code></pre></td></tr></table></figure>
+<p><code>for</code>语句的定义由两部分组成：循环头和循环体。循环头用于控制循环次数，包括一个初始化语句（init-statement）、一个循环条件（condition）以及一个表达式（expression）。</p>
+<p>在本例中，初始化语句是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">int val = 1;<br></code></pre></td></tr></table></figure>
+<p>这一初始化语句创建了一个<code>int</code>型变量<code>val</code>，并将其值初始化为1。与<code>while</code>循环的例子不同的是，<code>for</code>循环初始化语句定义的变量<code>val</code>只能在循环中使用，在循环外无法使用。初始化语句只在<code>for</code>循环开始时执行一次。</p>
+<p>在本例中，循环条件是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">val &lt;= 10;<br></code></pre></td></tr></table></figure>
+<p>当<code>val</code>的值小于等于10时，条件为真，程序会执行<code>for</code>循环体中的语句。</p>
+<p>在本例中，表达式是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">++val<br></code></pre></td></tr></table></figure>
+<p>表达式会在<code>for</code>循环体之后执行。本例中的表达式同样是使用递增运算符（<code>++</code>）将<code>val</code>的值加1。在执行完表达式后，<code>for</code>语句会重新检测循环条件，若<code>val</code>的新值仍小于等于10，则继续执行<code>for</code>循环体，若<code>val</code>的值大于10，则结束<code>for</code>循环，继续执行接下来的语句。</p>
+<p>简要总结一下本例中<code>for</code>循环的执行过程：</p>
+<p>1.执行初始化语句，创建变量<code>val</code>并将其值初始化为1。</p>
+<p>2.检测循环条件。若<code>val</code>的值小于等于10，则执行<code>for</code>循环体，否则结束循环，执行<code>for</code>循环后的第一条语句。</p>
+<p>3.执行表达式，将<code>val</code>的值加1。</p>
+<p>4.重复第2步，检测循环条件，只要条件为真，就继续执行接下来的步骤。</p>
+<p>注：</p>
+<p>1.初始化语句、循环条件和表达式之间是用分号而不是逗号分隔。</p>
+<p>2.初始化语句和表达式可以为空。</p>
+<h3 id="1-4-3-读取数量不定的输入数据"><a href="#1-4-3-读取数量不定的输入数据" class="headerlink" title="1.4.3 读取数量不定的输入数据"></a>1.4.3 读取数量不定的输入数据</h3><p>我们已经编写了一个求从1到10这10个整数的和的程序。我们可以对这个程序进行扩展，编写一个求用户输入的数的和的程序。与先前的情况不同的是，我们事先并不知道会读取多少个数，程序需要一直对输入的数进行求和，直至没有新的输入为止。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">#include &lt;iostream&gt;<br>int main()<br>&#123;<br>    // sum用于保存求和的结果，value用于保存用户输入的数。<br>    int sum = 0, value = 0;<br>    // 持续求和直至没有新的输入。<br>    while (std::cin &gt;&gt; value) <br>        sum += value;// 等价于sum = sum +value。<br>    std::cout &lt;&lt; &quot;Sum is: &quot; &lt;&lt; sum &lt;&lt; std::endl;<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果输入：</p>
+<p><code>3 4 5 6</code></p>
+<p>则程序会输出：</p>
+<p><code>Sum is: 18</code></p>
+<p>在这里，我们使用变量<code>value</code>保存用户输入的每个数。而数据的读取操作是在<code>while</code>循环的条件中完成的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">while (std::cin &gt;&gt; value)<br></code></pre></td></tr></table></figure>
+<p>注意到<code>while</code>循环的条件是表达式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">std::cin &gt;&gt; value<br></code></pre></td></tr></table></figure>
+<p>输入运算符<code>&gt;&gt;</code>会将用户输入的数保存在变量<code>value</code>中，并返回左侧的<code>std::cin</code>。也就是说，表达式的运算结果就是<code>std::cin</code>。<code>while</code>循环的条件实际上是在检测<code>std::cin</code>。</p>
+<p>当一个<code>istream</code>对象作条件时，条件实际上是在检测流的状态。若流没有错误，则<code>istream</code>对象有效，条件为真。当遇到文件结束符（end-of-file）或无效输入（例如读取的值不是一个整数）时，<code>istream</code>对象的状态会变为无效，此时条件为假。</p>
+<p>本例中的<code>while</code>循环会一直执行至遇到文件结束符或无效输入。<code>while</code>循环体使用复合赋值运算符（<code>+=</code>）将当前<code>value</code>的值加到<code>sum</code>上。在<code>while</code>循环结束后，程序就会输出求和的结果。</p>
+<h3 id="1-4-4-if语句"><a href="#1-4-4-if语句" class="headerlink" title="1.4.4 if语句"></a>1.4.4 if语句</h3><p>C++提供了<code>if</code>语句来实现条件执行，即当条件为真时，执行<code>if</code>语句中的内容，否则不执行。</p>
+<p>可以利用<code>if</code>语句编写一个程序，统计用户输入的某个数连续出现的次数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">#include &lt;iostream&gt;<br>int main()<br>&#123;<br>    // currVal用于表示当前正在统计的数，val用于保存用户输入的数。<br>    int currVal = 0, val = 0;<br>    // 读取第一个输入的数，且只有在有输入时才会执行if语句中的内容。<br>    if (std::cin &gt;&gt; currVal) &#123;<br>        int cnt = 1;// 变量cnt作为计数器，统计用户输入的数连续出现的次数。<br>        // 利用while循环连续读取用户输入的数。<br>        while (std::cin &gt;&gt; val) &#123;<br>            if (val == currVal) // 如果用户输入的数和当前值相同。<br>                ++cnt;// 连续出现的次数+1。<br>            else &#123;  // 如果用户输入的数和当前值不同，则意味着用户输入了新的数。<br>                // 输出当前值连续出现的次数。<br>                std::cout &lt;&lt; currVal &lt;&lt; &quot; occurs &quot; &lt;&lt; cnt<br>                          &lt;&lt; &quot; times&quot; &lt;&lt; std::endl;<br>                // 将val赋给currVal，表示开始统计下一个数连续出现的次数。<br>                currVal = val;<br>                cnt = 1;// 重置计数器。<br><br>            &#125;<br>        &#125;// while语句在此结束。<br>        // 输出用户输入的最后一个数连续出现的次数。<br>        std::cout &lt;&lt; currVal &lt;&lt; &quot; occurs &quot; &lt;&lt; cnt<br>                  &lt;&lt; &quot; times&quot; &lt;&lt; std::endl;<br>    &#125;// 最外层的if语句在此结束。<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>与之前的程序相比，该程序中新的内容就是两个<code>if</code>语句。其中第一个<code>if语句</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">if (std::cin &gt;&gt; currVal) &#123;<br>    // ...<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>的条件是<code>std::cin &gt;&gt; currVal</code>，该条件只有在有初始输入时才为真，换言之，只有当有数据输入时，<code>if</code>语句中的内容才会被执行。</p>
+<p>第二个<code>if</code>语句包含在<code>while</code>循环体中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">if (val == currVal) // 如果用户输入的数和当前值相同。<br>    ++cnt;// 连续出现的次数+1。<br>else &#123;  // 如果用户输入的数和当前值不同，则意味着用户输入了新的数。<br>    // 输出当前值连续出现的次数。<br>    std::cout &lt;&lt; currVal &lt;&lt; &quot; occurs &quot; &lt;&lt; cnt<br>              &lt;&lt; &quot; times&quot; &lt;&lt; std::endl;<br>    // 将val赋给currVal，表示开始统计下一个数连续出现的次数。<br>    currVal = val;<br>    cnt = 1;// 重置计数器。<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>在第二个<code>if</code>语句的条件<code>val == currVal</code>中，程序使用了相等运算符（<code>==</code>）来检测<code>val</code>是否和<code>currVal</code>相等。若二者相等，则执行<code>if</code>后的语句，使<code>cnt</code>（计数器）的值加1。若二者不相等，则执行<code>else</code>之后的语句块，输出当前值连续出现的次数，并做好统计下一个数连续出现的次数的准备。</p>
+<p>并且，要注意到，在<code>while</code>语句结束后，最后一个<code>currVal</code>连续出现的次数没有被输出，因此需要在<code>while</code>语句之后，将最后一个<code>currVal</code>连续出现的次数输出。</p>
+<p>注：</p>
+<p>1.在C++中，使用<code>=</code>进行赋值，使用<code>==</code>判断两个对象的值是否相等。一个常见的错误是在条件中将<code>==</code>误用成<code>=</code>。<br>2.C++中没有强制的缩进格式要求，但习惯上会做适当的缩进，以使得代码结构更清晰，提升代码可读性。</p>
+<h2 id="1-5-类简介"><a href="#1-5-类简介" class="headerlink" title="1.5 类简介"></a>1.5 类简介</h2><p>为了完成书店程序，我们还需要定义一个数据结构（data structure）来表示销售数据。在C++中，可以通过定义一个类（class）来定义一个数据结构。一个类定义了一个数据类型，及其相关的一组操作。</p>
+<p>为了使用一个类，我们需要知道：</p>
+<ul>
+<li><p>类名是什么？</p>
+</li>
+<li><p>类在哪里定义？</p>
+</li>
+<li><p>这个类支持什么操作？</p>
+</li>
+</ul>
+<p>在这里，假定要使用的类名为<code>Sales_item</code>，它定义在头文件<code>Sales_item.h</code>中。</p>
+<p>为了在程序中访问定义类的头文件，需要在代码中使用<code>#include &quot;头文件名&quot;</code>。头文件一般用其中定义的类名来命名，其后缀通常是<code>.h</code>（实际上，大多数情况下对头文件的文件格式不会有强制性的要求，甚至<code>.txt</code>文件也可以作为头文件使用）。</p>
+<h3 id="1-5-1-Sales-item类"><a href="#1-5-1-Sales-item类" class="headerlink" title="1.5.1 Sales_item类"></a>1.5.1 Sales_item类</h3><p><code>Sales_item</code>类的作用是表示一本书的总销售额、售出册数和平均售价。在这里，我们暂且不需要知道<code>Sales_item</code>类是如何实现的，只需要知道<code>Sales_item</code>类的对象可以执行什么操作。</p>
+<p>每个类实际上都定义了一个新的数据类型，类型名就是类名。因此，<code>Sales_item</code>类定义了一个名为<code>Sales_item</code>的类型。当我们写出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">Sales_item item;<br></code></pre></td></tr></table></figure>
+<p>时，我们就定义了一个名为<code>item</code>的<code>Sales_item</code>类的变量（对象）。</p>
+<p><code>Sales_item</code>类对象可以执行如下操作：</p>
+<ul>
+<li><p>调用名为<code>isbn</code>的函数从一个<code>Sales_item</code>类对象中提取ISBN号。</p>
+</li>
+<li><p>使用输入运算符<code>&gt;&gt;</code>和输出运算符<code>&lt;&lt;</code>读、写<code>Sales_item</code>类对象。</p>
+</li>
+<li><p>使用赋值运算符<code>=</code>将一个<code>Sales_item</code>类对象的值赋给另一个<code>Sales_item</code>类对象。</p>
+</li>
+<li><p>使用加法运算符<code>+</code>将两个<code>Sales_item</code>类对象相加。两个对象必须表示同一本书（有着相同的ISBN号），加法运算的结果是一个新的<code>Sales_item</code>类对象，其ISBN号与两个运算对象相同，总销售额和售出册数则等于两个运算对象的对应值之和。</p>
+</li>
+</ul>
+<p><strong>读写Sales_item</strong></p>
+<p>下面的程序会从标准输入中读取销售记录，保存到一个<code>Sales_item</code>类对象中，并输出。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">#include &lt;iostream&gt;<br>#include &quot;Sales_item.h&quot; // 注意使用#include语句指定头文件Sales_item.h。<br>int main()<br>&#123;<br>    Sales_item book;<br>    // 读取并写入<br>    std::cin &gt;&gt; book;<br>    // 输出Sales_item类变量中保存的数据（ISBN号、总售出册数、总销售和和平均价格）。<br>    std::cout &lt;&lt; book &lt;&lt; std::endl<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果输入</p>
+<p><code>0-201-70353-X 4 24.99</code></p>
+<p>则会输出</p>
+<p><code>0-201-70353-X 4 99.96 24.99</code></p>
+<p>输入表示书店以24.99美元的价格售出了4册书。输出表示这本书总售出册数是4，总销售额是99.96美元，平均售价是24.99美元。</p>
+<p><strong>Sales_item对象的加法</strong></p>
+<p>下面的程序会在读取两条销售记录后将其相加。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">#include &lt;iostream&gt;<br>#include &quot;Sales_item.h&quot;<br>int main()<br>&#123;<br>    Sales_item item1, item2;<br>    std::cin &gt;&gt; item1 &gt;&gt; item2;<br>    std::cout &lt;&lt; item1 + item2 &lt;&lt; std::endl;<br>    return 0;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>如果输入</p>
+<p><code>0-201-78345-X 3 20.00</code><br><code>0-201-78345-X 2 25.00</code></p>
+<p>则会输出</p>
+<p><code>0-201-78345-X 5 110 22</code></p>
+<p>注：</p>
+<p>通过文件重定向操作，可以实现在运行程序时从一个文件读取输入数据，并将输出结果保存在另一个文件中的效果。</p>
+<p>Linux系统中文件重定向的命令为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs &#123;.line-numbers&#125;">$ ./addItems &lt;infile &gt;outfile<br></code></pre></td></tr></table></figure>
+<p>上述命令会运行名为<code>addItems</code>的文件，且会从名为<code>infile</code>的文件中读取输入数据，并将输出结果保存到名为<code>outfile</code>的文件中。两个文件都位于当前目录中，并且<code>outfile</code>可以不预先创建。</p>
+<h3 id="1-5-2-初识成员函数"><a href="#1-5-2-初识成员函数" class="headerlink" title="1.5.2 初识成员函数"></a>1.5.2 初识成员函数</h3><p><strong>成员函数：</strong> 成员函数是在类的定义内部声明和定义的函数。成员函数可以操作类的任意对象，以及访问类对象的成员。</p>
+<p>要将两个<code>Sales_item</code>类对象相加，首先需要检查这两个<code>Sales_item</code>类对象是否有相同的ISBN号（如果ISBN号相同，则表示二者是同一本书的两条销售记录，应该合并）。通过调用定义在<code>Sales_item</code>类中的名为<code>isbn</code>的成员函数，就可以实现这一点。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">#include &lt;iostream&gt;<br>#include &quot;Sales_item.h&quot;<br>int mian()<br>&#123;<br>    Sales_item item1, item2;<br>    std::cin &gt;&gt; item1 &gt;&gt; item2;<br>    // 检查两条销售记录是否有着同样的ISBN号。<br>    if (item1.isbn() == item2.isbn()) &#123;<br>        //若相同，则将两条销售记录合并后输出。<br>        std::cout &lt;&lt; item1 + item2 &lt;&lt; std::endl;<br>        return 0;// 表示程序运行成功。<br>    &#125;<br>    else &#123;<br>        std::cerr &lt;&lt; &quot;Data must refer to same ISBN&quot; &lt;&lt; std::endl;<br>        return -1;// 表示程序运行失败。<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>上述代码中<code>if</code>语句的条件<code>item1.isbn() == item2.isbn()</code>调用了名为<code>isbn</code>的成员函数。</p>
+<p>我们通常用一个类对象来调用成员函数。上述条件的左侧</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">item1.isbn()<br></code></pre></td></tr></table></figure>
+<p>使用了点运算符<code>.</code>来表达“获取名为<code>item1</code>的<code>Sales_item</code>对象的<code>isbn</code>成员”。点运算符只能作用于类类型的对象，其左侧运算对象必须是一个类类型对象，右侧运算对象必须是该类型的一个成员名，运算结果为右侧运算对象指定的成员名。</p>
+<p>当我们访问一个成员函数时，实现的效果就是调用该成员函数。我们通过调用运算符<code>()</code>来调用函数。调用运算符的内部用于放置实参（argument）列表（可能为空）。因此，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">item1.isbn()<br></code></pre></td></tr></table></figure>
+<p>会调用名为<code>isbn</code>的成员函数，并返回保存在<code>item1</code>中的ISBN号。</p>
+<p>综上所述，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">item1.isbn() == item2.isbn()<br></code></pre></td></tr></table></figure>
+<p>会比较<code>item1</code>和<code>item2</code>中保存的ISBN号，若相同，则条件为真，若不同，则条件为假。</p>
+<h2 id="1-6-书店程序"><a href="#1-6-书店程序" class="headerlink" title="1.6 书店程序"></a>1.6 书店程序</h2><p>利用之前所学的知识，我们现在可以完成一个读取、处理和输出销售数据的书店程序。</p>
+<p>在这里，我们假设同一本书（ISBN号相同）的所有销售记录是保存在一起的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs C++&#123;.line-numbers&#125;">#include &lt;iostream&gt;<br>#include &quot;Sales_item.h&quot;<br>int main()<br>&#123;<br>    Sales_item total;// Sales_item对象total用于保存最终的销售数据。<br>    // 检测是否有初始输入，并将初始输入保存到total中。<br>    if (std::cin &gt;&gt; total) &#123;<br>        Sales_item trans;// Sales_item对象trans用于保存新输入的销售记录。<br>        // 通过while循环不断读取销售记录。<br>        while (std::cin &gt;&gt; trans) &#123;<br>            // 检测新输入的销售记录和当前处理的销售记录是否有着相同的ISBN号。<br>            if (total.isbn() == trans.isbn())<br>                total += trans;// 若ISBN号相同，则合并销售记录。<br>            else &#123;<br>                // 若ISBN号不同，则意味着输入了新书的销售记录。<br>                // 输出当前处理的书最终的销售数据。<br>                std::cout &lt;&lt; total &lt;&lt; std::endl;<br>                total = trans;// 将trans的值赋给total，开始处理下一本书。<br>            &#125;<br>        &#125;<br>        // 输出最后一本书的销售数据。<br>        std::cout &lt;&lt; total &lt;&lt; std::endl;<br>    &#125;<br>    // 若没有初始输入，则输出一条错误信息。<br>    else &#123;<br>        std::cerr &lt;&lt; &quot;No Data?!&quot; &lt;&lt; std::endl;<br>        return -1;// 表示程序运行失败。<br>    &#125;<br>    return 0;// 表示程序运行成功。<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>我们可以参考1.4.4节和1.5.2节的程序。这个书店程序使用<code>total</code>保存最终的销售数据，并通过最外层<code>if</code>语句的条件来完成初始输入的检测和写入。若没有数据输入，则直接跳到后面的<code>else</code>语句，输出一条错误信息，提示用户没有数据输入。若初始输入成功，则创建变量<code>trans</code>来保存后续输入的销售记录，并和之前一样，通过<code>while</code>循环不断读取销售记录。若新输入记录的ISBN号和当前记录的ISBN号相同，则表示是同一本书的销售记录，将二者合并（<code>total += trans;</code>）；若新输入记录的ISBN号和当前记录的ISBN号不同，则当前书的销售记录已处理完毕，且输入了下一本书的销售记录，需要将当前书最终的销售记录输出，并更新<code>total</code>（<code>total = trans;</code>），做好处理下一本书销售记录的准备。</p>
+<p>此外，还需要注意，在<code>while</code>循环结束后，<code>total</code>中还保存着最后一本书的销售数据，因此还需要在<code>while</code>循环结束后，将最后一本书的销售数据输出。</p>
+<p>若已事先将所有销售记录保存在一个文件中，则可以通过文件重定向操作，从文件中快速读取销售记录，并将结果保存在另一个文件中。</p>
+
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2023-12-16</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-tags__link button"># 学习笔记</a><a href="/tags/C/" class="post-tags__link button"># C++</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2023/11/22/ODR-and-LNK2005/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            单一定义规则（ODR）与LNK2005错误
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+
+
+</main>
+
+            <footer class="footer">
+    
+    
+
+
+    
+     
+ 
+
+ 
+    
+    
+    <p>Powered by <a href="stephenzhiyilin.github.io" target="_blank">Stephen Zhiyi Lin</a>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+
+    </body>
+</html>
